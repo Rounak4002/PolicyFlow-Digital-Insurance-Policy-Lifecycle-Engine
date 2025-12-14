@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PolicyFlow</title>
+</head>
+<body>
+  <h2>PolicyFlow – Digital Insurance Policy Lifecycle Engine</h2>
+
+  <form id="policyForm">
+    <input id="name" placeholder="Customer Name" required />
+    <input id="type" placeholder="Policy Type (Health / Life)" required />
+    <input id="premium" type="number" placeholder="Premium Amount" required />
+    <button type="submit">Create Policy</button>
+  </form>
+
+  <script>
+    document.getElementById("policyForm").onsubmit = async function(e) {
+      e.preventDefault();
+      await fetch("http://localhost:8000/policies", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          customer_name: name.value,
+          policy_type: type.value,
+          premium_amount: premium.value,
+          start_date: "2025-01-01",
+          end_date: "2026-01-01"
+        })
+      });
+      alert("Policy created successfully");
+    }
+  </script>
+</body>
+</html>
